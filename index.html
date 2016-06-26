@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Adrien Couplet">
+
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'>
+	<link href="ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Un radar à Mouscron</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Statistiques</a></li>
+					<li><a href="#fonctionnement">Fonctionnement</a></li>
+					<li><a href="#raisons">À propos</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+    <div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="col-sm-12">
+					<form class="form-horizontal" role="form">
+						<fieldset>
+							<legend>Sélection des données</legend>
+							<div class="form-group">
+								<label class="col-md-5 control-label" for="textinput">Date de début :</label>  
+								<div class="col-md-7">
+									<input id="firstDate" name="textinput" type="date" class="form-control input-md" required="true">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-5 control-label" for="textinput">Date de fin :</label>  
+								<div class="col-md-7">
+									<input id="lastDate" name="textinput" type="date" class="form-control input-md" required="true">
+								</div>
+							</div>
+							<div class="form-group"> 
+								<div class="col-md-offset-5 col-md-7">
+									<button type="submit" id="submit" class="btn btn-default">Actualiser</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<div class="col-sm-12">
+					<legend>Statistiques</legend>
+				</div>
+			</div>
+			<div class="col-sm-8">
+				<div class="col-sm-12">
+					<legend>Fréquence de passage</legend>
+					<div class="graph" id="frequencySpeed"></div>
+					<div class="graph" id="frequencyTime"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="resultat"></div>
+    <div id="chart_div"></div>
+
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="ie10-viewport-bug-workaround.js"></script>
+    <script src="moment.js"></script>
+    <script src="ajax.js"></script>
+</body>
+</html>

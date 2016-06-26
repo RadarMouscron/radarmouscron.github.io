@@ -18,7 +18,7 @@ $(document).ready(function(e){
 function requestData(){
 	$.ajax({
 		type: "POST",
-		url: "dateselect.php",
+		url: "http://adriencouplet.be/dateselect.php",
 		data: { 'd1' : $("#firstDate").val(), 'd2' : $("#lastDate").val() },
 		dataType: "json",
 		success: function(data) {

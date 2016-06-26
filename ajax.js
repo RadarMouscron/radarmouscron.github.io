@@ -1,5 +1,6 @@
 $(document).ready(function(e){
 	google.charts.load('current', {'packages':['corechart']});
+	console.log("Page loaded");
 	
 	var today = moment().format('YYYY-MM-DD');
 	$('#firstDate').val(today);

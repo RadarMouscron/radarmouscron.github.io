@@ -1,5 +1,22 @@
+var result;
+
 $(document).ready(function(e){
 	google.charts.load('current', {'packages':['corechart']});
+	enableCollapsing();
+	
+	//ResizeTrigger
+	$(window).resize(function() {
+		if(this.resizeTO) clearTimeout(this.resizeTO);
+		this.resizeTO = setTimeout(function() {
+			$(this).trigger('resizeEnd');
+		}, 500);
+	});
+	
+	$(window).on('resizeEnd', function() {
+		drawChart_frequencySpeed(JSON.parse(JSON.stringify(result)));
+		drawChart_frequencyTime(JSON.parse(JSON.stringify(result)));
+		drawChart_amendePie(JSON.parse(JSON.stringify(result)));
+	});
 	
 	var today = moment().format('YYYY-MM-DD');
 	$('#firstDate').val(today);
@@ -7,13 +24,42 @@ $(document).ready(function(e){
 	
 	$('form').on('submit', function(e){
 		e.preventDefault();
-		$("#frequencySpeed").addClass('loader');
-		$("#frequencyTime").addClass('loader');
+		hideEverything();
 		requestData();
 	});
 	
 	google.charts.setOnLoadCallback(requestData);
 });
+
+function hideEverything(){
+	$('.loading').show();
+	$('.loaded').hide();
+	
+	$('#totalCarNumber').html("-");
+	$('#overSpeedCar').html("-");
+	$('#totalMoney').html("-");
+}
+
+function enableCollapsing(){
+	$('#collapseDiv1').on('shown.bs.collapse', function () {
+		$("#glyphiconCollapse1").removeClass("glyphicon-chevron-left").addClass("glyphicon-chevron-down");
+		drawChart_frequencySpeed(JSON.parse(JSON.stringify(result)));
+		drawChart_frequencyTime(JSON.parse(JSON.stringify(result)));
+	});
+
+	$('#collapseDiv1').on('hidden.bs.collapse', function () {
+		$("#glyphiconCollapse1").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-left");
+	});
+	
+	$('#collapseDiv2').on('shown.bs.collapse', function () {
+		$("#glyphiconCollapse2").removeClass("glyphicon-chevron-left").addClass("glyphicon-chevron-down");
+		drawChart_amendePie(JSON.parse(JSON.stringify(result)));
+	});
+
+	$('#collapseDiv2').on('hidden.bs.collapse', function () {
+		$("#glyphiconCollapse2").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-left");
+	});
+}
 
 function requestData(){
 	$.ajax({
@@ -22,9 +68,11 @@ function requestData(){
 		data: { 'd1' : $("#firstDate").val(), 'd2' : $("#lastDate").val() },
 		dataType: "json",
 		success: function(data) {
+			result = data;
 			drawChart_frequencySpeed(JSON.parse(JSON.stringify(data)));
 			drawChart_frequencyTime(JSON.parse(JSON.stringify(data)));
 			drawChart_amendePie(JSON.parse(JSON.stringify(data)));
+			calculateStats(JSON.parse(JSON.stringify(data)));
 		}
 	});
 }
@@ -50,6 +98,8 @@ function drawChart_frequencySpeed(data){
 	};
 
 	var chart = new google.visualization.Histogram(document.getElementById('frequencySpeed'));
+	$('.loading').hide();
+	$('.loaded').show();
 	chart.draw(chartData, options);
 }
 
@@ -104,15 +154,16 @@ function drawChart_frequencyTime(data){
 	var chart = new google.visualization.ComboChart(document.getElementById('frequencyTime'));
 	chart.draw(chartData, options);
 	
+	
 }
 
 function drawChart_amendePie(data){
 	var amendePie = new Array(5);
 	amendePie[0] = ['Degré','Nombre'];
-	amendePie[1] = ['Respecte la limite de vitesse',0];
-	amendePie[2] = ['De 1 à 10 km/h: 50€ ',0];
-	amendePie[3] = ['De 11 à 30 km/h: 50 € + 10 € par km/h suppl.',0]; 
-	amendePie[4] = ['Plus de 30 km/h: Renvoi devant le tribunal',0];
+	amendePie[1] = ['Aucun excès',0];
+	amendePie[2] = ['Excès de 1 à 10 km/h',0];
+	amendePie[3] = ['Excès de 11 à 30 km/h',0]; 
+	amendePie[4] = ['Excès de plus de 30 km/h',0];
 	for (i = 1; i < data.length; i++){
 		var s = data[i][1];
 		if (s < 50.0){ amendePie[1][1] = amendePie[1][1]+1; }
@@ -129,5 +180,32 @@ function drawChart_amendePie(data){
 
 	var chart = new google.visualization.PieChart(document.getElementById('amendePie'));
 	chart.draw(chartData, options);
+	
+}
+
+function calculateStats(data){
+	totalCarNumber = data.length;
+	overSpeedCar = 0;
+	totalMoney = 0;
+	
+	for (i = 1; i < data.length; i++){
+		var s = data[i][1];
+		if (s < 50.0){}
+		else if (s >= 50.0 && s < 60.0){ 
+				overSpeedCar++;
+				totalMoney += 50;
+		}
+		else if (s >= 60.0 && s < 80.0){ 
+			overSpeedCar++;
+			totalMoney += (50 + (Math.floor(s-60)*10));
+		}
+		else { 
+			overSpeedCar++;
+		}
+	}
+	
+	$('#totalCarNumber').html(totalCarNumber);
+	$('#overSpeedCar').html(overSpeedCar);
+	$('#totalMoney').html(totalMoney + " €");
 	
 }

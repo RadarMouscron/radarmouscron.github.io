@@ -41,7 +41,7 @@
 
     <div class="container">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-4" id="left">
 				<div class="col-sm-12">
 					<form class="form-horizontal" role="form">
 						<fieldset>
@@ -68,17 +68,54 @@
 				</div>
 				<div class="col-sm-12">
 					<legend>Statistiques</legend>
+					<table class="stats table borderless">
+						<tr><td>Nombre de voitures:</td><td id="totalCarNumber" class="stat">-</td></tr>
+						<tr><td>Voiture en excès de vitesse:</td><td id="overSpeedCar" class="stat">-</td></tr>
+						<tr><td>Montant généré par les amendes:</td><td id="totalMoney" class="stat">-</td></tr>
+					</table>
 				</div>
 			</div>
-			<div class="col-sm-8">
+			<div class="col-sm-8" id="right">
 				<div class="col-sm-12">
-					<legend>Fréquence de passage</legend>
-					<div class="graph" id="frequencySpeed"></div>
-					<div class="graph" id="frequencyTime"></div>
+					<legend><a class="collapseLink" data-toggle="collapse" data-target="#collapseDiv1">Fréquence de passage <div class="pull-right"><span id="glyphiconCollapse1" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></div></a></legend>
+					<div id="collapseDiv1" class="collapse in">
+						<div class="sk-fading-circle loading">
+						<div class="sk-circle1 sk-circle"></div>
+						<div class="sk-circle2 sk-circle"></div>
+						<div class="sk-circle3 sk-circle"></div>
+						<div class="sk-circle4 sk-circle"></div>
+						<div class="sk-circle5 sk-circle"></div>
+						<div class="sk-circle6 sk-circle"></div>
+						<div class="sk-circle7 sk-circle"></div>
+						<div class="sk-circle8 sk-circle"></div>
+						<div class="sk-circle9 sk-circle"></div>
+						<div class="sk-circle10 sk-circle"></div>
+						<div class="sk-circle11 sk-circle"></div>
+						<div class="sk-circle12 sk-circle"></div>
+					</div>
+						<div class="graph loaded" id="frequencySpeed"></div>
+						<div class="graph loaded" id="frequencyTime"></div>
+					</div>
 				</div>
 				<div class="col-sm-12">
-					<legend>Excès de vitesse</legend>
-					<div class="graph" id="amendePie"></div>
+					<legend><a class="collapseLink" data-toggle="collapse" data-target="#collapseDiv2">Excès de vitesse <div class="pull-right"><span id="glyphiconCollapse2" class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></div></a></legend>
+					<div id="collapseDiv2" class="collapse in">
+						<div class="sk-fading-circle loading">
+						<div class="sk-circle1 sk-circle"></div>
+						<div class="sk-circle2 sk-circle"></div>
+						<div class="sk-circle3 sk-circle"></div>
+						<div class="sk-circle4 sk-circle"></div>
+						<div class="sk-circle5 sk-circle"></div>
+						<div class="sk-circle6 sk-circle"></div>
+						<div class="sk-circle7 sk-circle"></div>
+						<div class="sk-circle8 sk-circle"></div>
+						<div class="sk-circle9 sk-circle"></div>
+						<div class="sk-circle10 sk-circle"></div>
+						<div class="sk-circle11 sk-circle"></div>
+						<div class="sk-circle12 sk-circle"></div>
+					</div>
+						<div class="graph loaded" id="amendePie"></div>
+					</div>
 				</div>
 			</div>
 		</div>

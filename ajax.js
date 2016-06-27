@@ -24,6 +24,7 @@ function requestData(){
 		success: function(data) {
 			drawChart_frequencySpeed(JSON.parse(JSON.stringify(data)));
 			drawChart_frequencyTime(JSON.parse(JSON.stringify(data)));
+			drawChart_amendePie(JSON.parse(JSON.stringify(data)));
 		}
 	});
 }
@@ -48,7 +49,6 @@ function drawChart_frequencySpeed(data){
 	};
 
 	var chart = new google.visualization.Histogram(document.getElementById('frequencySpeed'));
-	$("#frequencySpeed").removeClass('loader');
 	chart.draw(chartData, options);
 }
 
@@ -101,7 +101,32 @@ function drawChart_frequencyTime(data){
 	};
 
 	var chart = new google.visualization.ComboChart(document.getElementById('frequencyTime'));
-	$("#frequencyTime").removeClass('loader');
+	chart.draw(chartData, options);
+	
+}
+
+function drawChart_amendePie(data){
+	var amendePie = new Array(5);
+	amendePie[0] = ['Degré','Nombre'];
+	amendePie[1] = ['Respecte la limite de vitesse',0];
+	amendePie[2] = ['De 1 à 10 km/h: 50€ ',0];
+	amendePie[3] = ['De 11 à 30 km/h: 50 € + 10 € par km/h suppl.',0]; 
+	amendePie[4] = ['Plus de 30 km/h: Renvoi devant le tribunal',0];
+	for (i = 1; i < data.length; i++){
+		var s = data[i][1];
+		if (s < 50.0){ amendePie[1][1] = amendePie[1][1]+1; }
+		else if (s >= 50.0 && s < 60.0){ amendePie[2][1] = amendePie[2][1]+1; }
+		else if (s >= 60.0 && s < 80.0){ amendePie[3][1] = amendePie[3][1]+1; }
+		else { amendePie[4][1] = amendePie[4][1]+1; }
+	}
+	console.log(amendePie);
+	var chartData = google.visualization.arrayToDataTable(amendePie);
+			
+	var options = {
+		title: 'Répartitions des excès de vitesse (vitesse corrigée)',
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('amendePie'));
 	chart.draw(chartData, options);
 	
 }

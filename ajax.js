@@ -184,7 +184,7 @@ function drawChart_amendePie(data){
 }
 
 function calculateStats(data){
-	totalCarNumber = data.length;
+	totalCarNumber = data.length-1;
 	overSpeedCar = 0;
 	totalMoney = 0;
 	

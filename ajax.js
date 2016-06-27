@@ -41,6 +41,7 @@ function drawChart_frequencySpeed(data){
 			title: 'Vitesse [km/h]',
 			viewWindow:{
                 min:35,
+                max:100,
 			},
 		},
 		vAxis: {

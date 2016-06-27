@@ -1,6 +1,5 @@
 $(document).ready(function(e){
 	google.charts.load('current', {'packages':['corechart']});
-	console.log("Page loaded");
 	
 	var today = moment().format('YYYY-MM-DD');
 	$('#firstDate').val(today);
@@ -41,7 +40,6 @@ function drawChart_frequencySpeed(data){
 			title: 'Vitesse [km/h]',
 			viewWindow:{
                 min:35,
-                max:100,
 			},
 		},
 		vAxis: {
@@ -88,7 +86,7 @@ function drawChart_frequencyTime(data){
 		},
 		vAxes: {
 			0: {title: 'Nombre de voitures'},
-			1: {title: 'Vitesse moyenne'}
+			1: {title: 'Vitesse moyenne', min: 0}
 		},
 		seriesType: 'bars',
 		series: {

@@ -86,7 +86,9 @@ function drawChart_frequencyTime(data){
 		},
 		vAxes: {
 			0: {title: 'Nombre de voitures'},
-			1: {title: 'Vitesse moyenne', min: 0}
+			1: {title: 'Vitesse moyenne', viewWindow:{
+                min:0,
+			},}
 		},
 		seriesType: 'bars',
 		series: {

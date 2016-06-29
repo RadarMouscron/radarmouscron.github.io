@@ -163,7 +163,7 @@ function drawChart_amendePie(data){
 	amendePie[3] = ['Excès de 11 à 30 km/h',0]; 
 	amendePie[4] = ['Excès de plus de 30 km/h',0];
 	for (i = 1; i < data.length; i++){
-		var s = data[i][1];
+		var s = data[i][1] - 6.0;
 		if (s < 50.0){ amendePie[1][1] = amendePie[1][1]+1; }
 		else if (s >= 50.0 && s < 60.0){ amendePie[2][1] = amendePie[2][1]+1; }
 		else if (s >= 60.0 && s < 80.0){ amendePie[3][1] = amendePie[3][1]+1; }
@@ -187,7 +187,7 @@ function calculateStats(data){
 	totalMoney = 0;
 	
 	for (i = 1; i < data.length; i++){
-		var s = data[i][1];
+		var s = data[i][1] - 6.0;
 		if (s < 50.0){}
 		else if (s >= 50.0 && s < 60.0){ 
 				overSpeedCar++;

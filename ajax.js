@@ -89,10 +89,10 @@ function requestData(){
 
 function calculateDataTable(data){
 	$("#bodyDataTable").empty();
-	for (i = 1; i <= 10 && i <= data.length; i++){
+	for (i = 1; i <= 5 && i <= data.length; i++){
 		var datetime = data[data.length-i][0];
 		var speed = data[data.length-i][1];
-		$("#bodyDataTable").append("<tr><td>" + datetime + "</td><td>" + speed + "</td><td>" + (speed-6.0) + "</td></tr>");
+		$("#bodyDataTable").append("<tr><td>" + moment(datetime).format('DD-MM-YYYY hh:mm:ss') + "</td><td>" + speed.toFixed(2) + " km/h</td><td>" + (speed-6.0).toFixed(2) + " km/h</td></tr>");
 	}
 }
 
@@ -188,7 +188,6 @@ function drawChart_amendePie(data){
 		else if (s >= 60.0 && s < 80.0){ amendePie[3][1] = amendePie[3][1]+1; }
 		else { amendePie[4][1] = amendePie[4][1]+1; }
 	}
-	console.log(amendePie);
 	var chartData = google.visualization.arrayToDataTable(amendePie);
 			
 	var options = {

@@ -60,6 +60,9 @@ body {
 	color: black;
 }
 
+.loaded {
+	display: none;
+}
 
 
 .sk-fading-circle {

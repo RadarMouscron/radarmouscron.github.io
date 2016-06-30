@@ -22,6 +22,11 @@ $(document).ready(function(e){
 	$('#firstDate').val(today);
 	$('#lastDate').val(today);
 	
+	setInterval(function() {
+		hideEverything();
+		requestData();
+	}, 60 * 1000);
+	
 	$('form').on('submit', function(e){
 		e.preventDefault();
 		hideEverything();

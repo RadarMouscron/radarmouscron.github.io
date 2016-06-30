@@ -78,12 +78,22 @@ function requestData(){
 		dataType: "json",
 		success: function(data) {
 			result = data;
+			calculateDataTable(data);
 			drawChart_frequencySpeed(JSON.parse(JSON.stringify(data)));
 			drawChart_frequencyTime(JSON.parse(JSON.stringify(data)));
 			drawChart_amendePie(JSON.parse(JSON.stringify(data)));
 			calculateStats(JSON.parse(JSON.stringify(data)));
 		}
 	});
+}
+
+function calculateDataTable(data){
+	$("#bodyDataTable").empty();
+	for (i = 1; i <= 10 && i <= data.length; i++){
+		var datetime = data[data.length-i][0];
+		var speed = data[data.length-i][1];
+		$("#bodyDataTable").append("<tr><td>" + datetime + "</td><td>" + speed + "</td><td>" + (speed-6.0) + "</td></tr>");
+	}
 }
 
 function drawChart_frequencySpeed(data){
@@ -191,9 +201,9 @@ function drawChart_amendePie(data){
 }
 
 function calculateStats(data){
-	totalCarNumber = data.length-1;
-	overSpeedCar = 0;
-	totalMoney = 0;
+	var totalCarNumber = data.length-1;
+	var overSpeedCar = 0;
+	var totalMoney = 0;
 	
 	for (i = 1; i < data.length; i++){
 		var s = data[i][1] - 6.0;

@@ -59,6 +59,15 @@ function enableCollapsing(){
 	$('#collapseDiv2').on('hidden.bs.collapse', function () {
 		$("#glyphiconCollapse2").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-left");
 	});
+	
+	$('#collapseDiv3').on('shown.bs.collapse', function () {
+		$("#glyphiconCollapse3").removeClass("glyphicon-chevron-left").addClass("glyphicon-chevron-down");
+		drawChart_amendePie(JSON.parse(JSON.stringify(result)));
+	});
+
+	$('#collapseDiv3').on('hidden.bs.collapse', function () {
+		$("#glyphiconCollapse3").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-left");
+	});
 }
 
 function requestData(){

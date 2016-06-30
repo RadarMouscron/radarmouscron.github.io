@@ -92,7 +92,7 @@ function calculateDataTable(data){
 	for (i = 1; i <= 5 && i <= data.length; i++){
 		var datetime = data[data.length-i][0];
 		var speed = data[data.length-i][1];
-		$("#bodyDataTable").append("<tr><td>" + moment(datetime).format('DD-MM-YYYY hh:mm:ss') + "</td><td>" + speed.toFixed(2) + " km/h</td><td>" + (speed-6.0).toFixed(2) + " km/h</td></tr>");
+		$("#bodyDataTable").append("<tr><td>" + moment(datetime).format('DD-MM-YYYY HH:mm:ss') + "</td><td>" + speed.toFixed(2) + " km/h</td><td>" + (speed-6.0).toFixed(2) + " km/h</td></tr>");
 	}
 }
 
